@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity">
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Benvenuto in SyncFiles! Questa app ti permette di sincronizzare i tuoi files su di un server SMB. Per ulteriori dettagli consulta la mia repository di GitHub accessibile al seguente link: https://github.com/leondaval/SyncGallery"
+        android:textSize="18sp"
+        android:layout_centerInParent="true"
+        android:padding="20dp"
+        android:textAlignment="center"
+        android:autoLink="web"
+        android:linksClickable="true"/>
+
+
+    <TextView
+        android:id="@+id/hoCapito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Ho capito"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:background="@android:color/holo_green_light"
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>
