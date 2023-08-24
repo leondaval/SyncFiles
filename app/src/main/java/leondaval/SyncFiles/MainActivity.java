@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
+    private int NotificationId = 1; // ID per la notifica
+
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
@@ -139,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean copySelectedFiles(Uri[] selectedFileUris) throws FileNotFoundException {
         boolean success = true;
         String dstDirPath = "/sdcard/DCIM/SYNC";
+
         for (Uri srcFileUri : selectedFileUris) {
             // Ottieni il nome originale del file con estensione
             String[] projection = {MediaStore.Images.Media.DISPLAY_NAME};
