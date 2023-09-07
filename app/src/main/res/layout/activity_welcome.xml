@@ -9,7 +9,7 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Benvenuto in SyncFiles! Questa app ti permette di sincronizzare i tuoi files su di un server SMB. Per ulteriori dettagli consulta la mia repository di GitHub accessibile al seguente link: https://github.com/leondaval/SyncGallery"
+        android:text="Benvenuto in SyncFiles! Questa app ti permette di sincronizzare i tuoi files su di un server SMB. Per ulteriori dettagli consulta la mia repository di GitHub accessibile al seguente link: https://github.com/leondaval/SyncFiles"
         android:textSize="18sp"
         android:layout_centerInParent="true"
         android:padding="20dp"
