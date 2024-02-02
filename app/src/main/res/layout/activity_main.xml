@@ -8,24 +8,24 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/syncDirectoryButton"
+        android:id="@+id/syncFilesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sincronizza foto/video"
+        android:text="Sincronizza files col server SMB"
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/moveDirectoryButton"
+        android:id="@+id/moveFilesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sposta foto/video"
+        android:text="Sposta files"
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/copyDirectoryButton"
+        android:id="@+id/copyFilesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Copia foto/video"
+        android:text="Copia files"
         android:layout_marginBottom="20dp"/>
 
 </LinearLayout>
