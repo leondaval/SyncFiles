@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE_INTERNET = 2;  // ID per la richiesta del permesso relativo all'uso di internet per il collegamento al server SMB
     boolean permissionCheck = false; //Controllo stato dei permessi
     private AlertDialog progressDialog; // Popup a schermo che mostra lo il caricamento del processo corrente
+    private boolean isCopying = false; // Variabile per tenere traccia dello stato del processo di copia
+    private boolean isMoveing = false; // Variabile per tenere traccia dello stato del processo di spostamento
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkPermissionMemory() || permissionCheck){
+
+                    // Inizializza e mostra l'AlertDialog
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setView(R.layout.progress_dialog_layout); // Creare un layout personalizzato con una ProgressBar
                     builder.setCancelable(false); // Imposta su true se vuoi che l'utente possa annullare l'operazione
@@ -75,9 +79,15 @@ public class MainActivity extends AppCompatActivity {
                     progressDialog = builder.create();
                     progressDialog.show();
 
-                    copy();
+                    isCopying = true; // Imposta la variabile a true quando inizia il processo di copia
 
+                    executeInBackground(() -> {
+                        copy();
+                    });
+
+                    isCopying = false; // Reimposta la variabile a false quando il processo di copia è completato
                     progressDialog.dismiss(); // Chiudi l'AlertDialog
+
                 }else
                     requestPermissionMemory();
             }
@@ -95,9 +105,15 @@ public class MainActivity extends AppCompatActivity {
                     progressDialog = builder.create();
                     progressDialog.show();
 
-                    move();
+                    isMoveing = true; // Imposta la variabile a true quando inizia il processo di spostamento
 
+                    executeInBackground(() -> {
+                        move();
+                    });
+
+                    isMoveing = false; // Reimposta la variabile a false quando il processo di spostamento è completato
                     progressDialog.dismiss(); // Chiudi l'AlertDialog
+
                 }else
                     requestPermissionMemory();
             }
@@ -124,6 +140,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    // Mostra nuovamente il ProgressDialog quando l'Activity viene riportata in primo piano
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (progressDialog != null && (isCopying || isMoveing) && !progressDialog.isShowing()) {
+            progressDialog.show();
+        }
+    }
+
+    // Nasconde il ProgressDialog quando l'Activity va in background
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (progressDialog != null && (isCopying || isMoveing) && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    private void executeInBackground(Runnable task) {executorService.execute(task);}
 
     private boolean checkPermissionInternet() {
         int networkStatePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE);
